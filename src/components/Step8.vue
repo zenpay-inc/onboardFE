@@ -1,38 +1,58 @@
 <template>
-    <p class="title mt-5">Your organization</p>
-    <!-- <div class="ml-4">
+  <div class="mx-16" style="width: 600px">
+    <p class="title mt-5">Identification information</p>
+
+    <div class="ml-4">
       <v-text-field
         v-model="title"
         :rules="rules"
         counter="125"
-        hint="Enter your legal business name:"
-        label="Enter your legal business name:"
+        hint="Primary business contact ID:"
+        label="Passport of state issued driver's license"
       ></v-text-field>
-
       <v-text-field
-        v-model="email"
-        :rules="[rules.required, rules.email]"
-        hint="Enter your e-mail:"
-        label="Enter your e-mail:"
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Secondary business contact ID:"
+        label="Passport of state issued driver's license"
+      ></v-text-field>
+      <v-text-field
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Certificate of incorporation:"
+        label="doc"
+      ></v-text-field>
+      <v-text-field
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Corporate bank account details:"
+        label="image of canceled check or bank statement"
+      ></v-text-field>
+      <v-text-field
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Merchant logo"
+        label="Upload image of logo"
       ></v-text-field>
     </div>
-    <v-subheader
-      >This email will be used to administer organization and cannot be Changed
-      late
-    </v-subheader> -->
     <!-- <v-btn
       class="yellow--text mt-16"
       color="green"
       style="margin-left: auto; margin-right: 35px"
       @click="saveDemo()"
     >
-      Save and Continue ->
+      Save and continue ->
     </v-btn> -->
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Step2",
+  name: "Step3",
   props: [],
   data() {
     return {

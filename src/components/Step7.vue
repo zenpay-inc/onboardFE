@@ -1,38 +1,51 @@
 <template>
-    <p class="title mt-5">Your organization</p>
-    <!-- <div class="ml-4">
+  <div class="mx-16" style="width: 600px">
+    <p class="title mt-5">Secondary business contact detail</p>
+
+    <div class="ml-4">
       <v-text-field
         v-model="title"
         :rules="rules"
         counter="125"
-        hint="Enter your legal business name:"
-        label="Enter your legal business name:"
+        hint="Primary business contact name:"
+        label="First, middle, last name"
       ></v-text-field>
-
+      <v-text-field
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Rolw within the business:"
+        label="Owner, contact etc, enum"
+      ></v-text-field>
       <v-text-field
         v-model="email"
         :rules="[rules.required, rules.email]"
-        hint="Enter your e-mail:"
-        label="Enter your e-mail:"
+        hint="Primary contact email address:"
+        label="Email id:"
+      ></v-text-field>
+      <v-text-field
+        v-model="title1"
+        :rules="rules"
+        counter="125"
+        hint="Primary contact phone number:"
+        label="Phone with country code picker and number"
+        type="number"
       ></v-text-field>
     </div>
-    <v-subheader
-      >This email will be used to administer organization and cannot be Changed
-      late
-    </v-subheader> -->
     <!-- <v-btn
       class="yellow--text mt-16"
       color="green"
       style="margin-left: auto; margin-right: 35px"
       @click="saveDemo()"
     >
-      Save and Continue ->
+      Save and continue ->
     </v-btn> -->
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Step2",
+  name: "Step3",
   props: [],
   data() {
     return {

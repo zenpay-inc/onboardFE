@@ -1,95 +1,75 @@
 <template>
- <div class="page-btn-list">
-        <v-row class="main-board">
-          <v-col class="col-lg-3 col-sm-12 col-xs-12 left-panel layout-center">
-              <div class="mx-10">
-                <p class="logotxt mt-5">
-                  ZenPay
-                </p>
-                <p class="subject mt-10">
-                  Merchant Payment Systems
-                </p>
-                <p class="label">
-                  Simplify your payment system
-                </p>
-                <p class="label -mt-2">
-                  Subscribe to your business software
-                </p>
-              </div>
-          </v-col>
-
-          <v-col class="d-flex flex-column col-lg-9 col-sm-12 col-xs-12 right-pannel layout-center">
-              <div class="mx-16" style="width:600px">
-                <p class="title mt-5">
-                  Let's verify your email
-                </p>
-                <div class="ml-4">
-                    <v-text-field
-                      v-model="email"
-                      :rules="[rules.required, rules.email]"
-                      hint="Registration email:"
-                      label="Registration email:"
-                    ></v-text-field>
-                </div>
-                <v-subheader><p>We have sent an email to the above email address.</p></v-subheader>
-                <v-subheader><p>Please check your mailbox, copy 6-digit number and paste it into the Token field below.</p>
-                </v-subheader>
-                 <div class="ml-4">
-                    <v-text-field
-                      v-model="title"
-                      :rules="rules"
-                      counter="125"
-                      hint="Token:"
-                      label="Token:"
-                    ></v-text-field>
-                </div>
-                <v-btn
+  <div class="mx-16" style="width: 600px">
+    <p class="title mt-5">Let's verify your email</p>
+    <!-- <div class="ml-4">
+      <v-text-field
+        v-model="email"
+        :rules="[rules.required, rules.email]"
+        hint="Registration email:"
+        label="Registration email:"
+      ></v-text-field>
+    </div>
+    <v-subheader
+      ><p>We have sent an email to the above email address.</p></v-subheader
+    >
+    <v-subheader
+      ><p>
+        Please check your mailbox, copy 6-digit number and paste it into the
+        Token field below.
+      </p>
+    </v-subheader>
+    <div class="ml-4">
+      <v-text-field
+        v-model="title"
+        :rules="rules"
+        counter="125"
+        hint="Token:"
+        label="Token:"
+      ></v-text-field>
+    </div> -->
+    <!-- <v-btn
                 class="yellow--text mt-16"
                 color="green"
                 style="margin-left: auto; margin-right:35px"
                 @click="saveDemo()"
               >
                 Verify and continue ->
-              </v-btn>
-              </div>
-          </v-col>
-        </v-row>
-      </div>
+              </v-btn> -->
+  </div>
 </template>
 
 <script>
 export default {
   name: "Step3",
   props: [],
-    data() {
+  data() {
     return {
-      title: '',
-        email: '',
-        rules: {
-          required: value => !!value || 'Required.',
-          counter: value => value.length <= 20 || 'Max 20 characters',
-          email: value => {
-            const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            return pattern.test(value) || 'Invalid e-mail.'
-          },
+      title: "",
+      email: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+        counter: (value) => value.length <= 20 || "Max 20 characters",
+        email: (value) => {
+          const pattern =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
         },
-    }
+      },
+    };
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
-
 <style lang="scss" scoped>
-.left-panel{
+.left-panel {
   background-color: #7c9bca;
 }
-.right-pannel{
-  background-color: rgb(0,0,0,0.1);
+.right-pannel {
+  background-color: rgb(0, 0, 0, 0.1);
   text-align: center;
 }
-.layout-center{
+.layout-center {
   display: flex;
   justify-content: center;
   align-items: center;
