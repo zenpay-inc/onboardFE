@@ -22,7 +22,7 @@
                 <Step2 />
                 <div class="ml-4">
                   <v-text-field
-                    v-model="title"
+                    v-model="businessName"
                     :rules="rules"
                     counter="125"
                     hint="Enter your legal business name:"
@@ -30,7 +30,7 @@
                   ></v-text-field>
 
                   <v-text-field
-                    v-model="email"
+                    v-model="businessEmail"
                     :rules="[rules.required, rules.email]"
                     hint="Enter your e-mail:"
                     label="Enter your e-mail:"
@@ -42,37 +42,77 @@
                 </v-subheader>
               </div>
               <div v-if="this.step === 3">
-                <Step3 />
-                <div class="ml-4">
-                  <v-text-field
-                    v-model="email"
-                    :rules="[rules.required, rules.email]"
-                    hint="Registration email:"
-                    label="Registration email:"
-                  ></v-text-field>
-                </div>
-                <v-subheader
-                  ><p>
-                    We have sent an email to the above email address.
-                  </p></v-subheader
-                >
-                <v-subheader
+                <div class="mx-16" style="width: 600px">
+                  <p class="title mt-5" style="color: green">
+                    {{ this.notification }}
+                  </p>
+
+                  <p class="title mt-5">Let's verify your email</p>
+                  <div class="ml-4">
+                    <v-text-field
+                      v-model="email"
+                      :rules="[rules.required, rules.email]"
+                      hint="Registration email:"
+                      label="Registration email:"
+                    ></v-text-field>
+                  </div>
+                  <v-subheader
+                    ><p>
+                      We have sent an email to the above email address.
+                    </p></v-subheader
+                  >
+                  <!-- <v-subheader
                   ><p>
                     Please check your mailbox, copy 6-digit number and paste it
                     into the Token field below.
                   </p>
-                </v-subheader>
-                <div class="ml-4">
-                  <v-text-field
+                </v-subheader> -->
+                  <div class="ml-4">
+                    <!-- <v-text-field
                     v-model="title"
                     :rules="rules"
                     counter="125"
                     hint="Token:"
                     label="Token:"
+                  ></v-text-field> -->
+                    <v-text-field
+                      v-model="password"
+                      :rules="[rules.required, rules.min]"
+                      :type="'password'"
+                      name="input-10-1"
+                      label="Password"
+                      hint="At least 8 characters"
+                      counter
+                    ></v-text-field>
+                  </div>
+                </div>
+              </div>
+              <div v-if="this.step === 4">
+                <Step4 />
+                <div class="ml-4">
+                  <v-text-field
+                    v-model="businessType"
+                    :rules="rules"
+                    counter="125"
+                    hint="Enter your business type:"
+                    label="Sole proprietorship, partnership, LLP, LLC, S/C corporation"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="incorporationCountry"
+                    :rules="rules"
+                    counter="125"
+                    hint="Enter your Country of incorporation:"
+                    label="Pull down list"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="incorporationState"
+                    :rules="rules"
+                    counter="125"
+                    hint="Enter your State of Incorporation:"
+                    label="Pull down list"
                   ></v-text-field>
                 </div>
               </div>
-              <Step4 v-if="this.step === 4" />
               <Step5 v-if="this.step === 5" />
               <Step6 v-if="this.step === 6" />
               <Step7 v-if="this.step === 7" />
@@ -98,10 +138,6 @@
           </v-col>
         </v-row>
       </div>
-      <!-- <Step2/>
-      <Step3/>
-      <Step4/>
-      <Step5/> -->
     </v-col>
   </v-container>
 </template>
@@ -109,19 +145,19 @@
 <script>
 import Step1 from "../components/Step1.vue";
 import Step2 from "../components/Step2.vue";
-import Step3 from "../components/Step3.vue";
 import Step4 from "../components/Step4.vue";
 import Step5 from "../components/Step5.vue";
 import Step6 from "../components/Step6.vue";
 import Step7 from "../components/Step7.vue";
 import Step8 from "../components/Step8.vue";
+import { db } from "../firebaseDb";
+import firebase from "firebase";
 
 export default {
   name: "Home",
   components: {
     Step1,
     Step2,
-    Step3,
     Step4,
     Step5,
     Step6,
@@ -133,6 +169,13 @@ export default {
     return {
       title: "",
       email: "",
+      businessName: "",
+      businessEmail: "",
+      password: "",
+      businessType: "",
+      incorporationCountry: "",
+      incorporationState: "",
+      notification: "",
       step: 1,
       rules: {
         required: (value) => !!value || "Required.",
@@ -145,16 +188,55 @@ export default {
       },
     };
   },
+  mounted() {
+    console.log("step--", this.$route.query.step);
+    if (this.$route.query.step > 3) this.step = 4;
+  },
   methods: {
     btnEvent: function () {
+      console.log("businessName---", localStorage.getItem("businessName"));
+      console.log("businessEmail---", localStorage.getItem("businessEmail"));
+      console.log("businessType---", this.businessType);
+      console.log("incorporationCountry---", this.incorporationCountry);
+      console.log("incorporationState---", this.incorporationState);
+
+      //this.emailVerification();
+
       if (this.step === 1) this.step = 2;
-      else if (this.step === 2) this.step = 3;
-      else if (this.step === 3) this.step = 4;
-      else if (this.step === 4) this.step = 5;
+      else if (this.step === 2) {
+        //  this.onboardDB();
+        localStorage.setItem("businessName", this.businessName);
+        this.step = 3;
+      } else if (this.step === 3) {
+        localStorage.setItem("businessEmail", this.businessEmail);
+
+        this.emailVerification();
+      } else if (this.step === 4) this.step = 5;
       else if (this.step === 5) this.step = 6;
       else if (this.step === 6) this.step = 7;
       else if (this.step === 7) this.step = 8;
     },
+    emailVerification: function () {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password) //createUserWithEmailAndPassword
+        .then(() => {
+          const user = firebase.auth().currentUser;
+          this.notification =
+            "Verification Email Sent. Please Check Your Email";
+          const actionCodeSettings = {
+            // url: `${process.env.VUE_APP_HOST_NAME}/sign-in/?email=${user.email}`,
+            url: `http://localhost:8080/?step=4`,
+          };
+          user.sendEmailVerification(actionCodeSettings);
+        })
+        .catch((error) => {
+          this.notification = "Auth Error";
+
+          this.error = error.message;
+        });
+    },
+   
   },
 };
 </script>

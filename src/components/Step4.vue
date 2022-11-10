@@ -1,8 +1,9 @@
 <template>
   <div class="mx-16" style="width: 600px">
+    <p class="title mt-5" style="color:green">Email verified</p>
     <p class="title mt-5">Additional Organization Detail</p>
 
-    <div class="ml-4">
+    <!-- <div class="ml-4">
       <v-text-field
         v-model="title"
         :rules="rules"
@@ -24,7 +25,7 @@
         hint="Enter your State of Incorporation:"
         label="Pull down list"
       ></v-text-field>
-    </div>
+    </div> -->
     <!-- <v-btn
       class="yellow--text mt-16"
       color="green"
