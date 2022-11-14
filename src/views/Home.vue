@@ -113,10 +113,144 @@
                   ></v-text-field>
                 </div>
               </div>
-              <Step5 v-if="this.step === 5" />
-              <Step6 v-if="this.step === 6" />
-              <Step7 v-if="this.step === 7" />
-              <Step8 v-if="this.step === 8" />
+              <div v-if="this.step === 5">
+                <Step5 />
+
+                <div class="ml-4">
+                  <v-text-field
+                    value="When was the business registered:"
+                    label=""
+                    disabled
+                  ></v-text-field>
+                  <v-date-picker v-model="businessRegistryDate"></v-date-picker>
+
+                  <v-text-field
+                    v-model="businessEinTaxId"
+                    :rules="rules"
+                    counter="125"
+                    hint="Enter your EIN/Tax ID Number:"
+                    label="Enter your EIN/Tax ID Number:"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="dunsNumber"
+                    :rules="rules"
+                    counter="125"
+                    hint="Enter your 9-digit DUNS Number if Applicable:"
+                    label="Enter your 9-digit DUNS Number if Applicable:"
+                    type="number"
+                  ></v-text-field>
+                </div>
+              </div>
+              <div v-if="this.step === 6">
+                <Step6 />
+                <div class="ml-4">
+                  <v-text-field
+                    v-model="primaryName"
+                    :rules="rules"
+                    counter="125"
+                    hint="Primary business contact name:"
+                    label="First, middle, last name"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="primaryRole"
+                    :rules="rules"
+                    counter="125"
+                    hint="Rolw within the business:"
+                    label="Owner, contact etc, enum"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="primaryEmail"
+                    :rules="[rules.required, rules.email]"
+                    hint="Primary contact email address:"
+                    label="Email id:"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="primaryPhone"
+                    :rules="rules"
+                    counter="125"
+                    hint="Primary contact phone number:"
+                    label="Phone with country code picker and number"
+                    type="number"
+                  ></v-text-field>
+                </div>
+              </div>
+              <div v-if="this.step === 7">
+                <Step7 />
+                <div class="ml-4">
+                  <v-text-field
+                    v-model="secondName"
+                    :rules="rules"
+                    counter="125"
+                    hint="Primary business contact name:"
+                    label="First, middle, last name"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="secondRole"
+                    :rules="rules"
+                    counter="125"
+                    hint="Rolw within the business:"
+                    label="Owner, contact etc, enum"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="secondEmail"
+                    :rules="[rules.required, rules.email]"
+                    hint="Primary contact email address:"
+                    label="Email id:"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="secondPhone"
+                    :rules="rules"
+                    counter="125"
+                    hint="Primary contact phone number:"
+                    label="Phone with country code picker and number"
+                    type="number"
+                  ></v-text-field>
+                </div>
+              </div>
+              <div v-if="this.step === 8">
+                <Step8 />
+                <div class="ml-4">
+                  <v-text-field
+                    v-model="primaryContactId"
+                    :rules="rules"
+                    counter="125"
+                    hint="Primary business contact ID:"
+                    label="Passport of state issued driver's license"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="secondContactId"
+                    :rules="rules"
+                    counter="125"
+                    hint="Secondary business contact ID:"
+                    label="Passport of state issued driver's license"
+                  ></v-text-field>
+
+                  <v-file-input
+                    v-model="certificateDocUrl"
+                    show-size
+                    counter
+                    multiple
+                    label="Certificate of incorporation:"
+                    hint="doc"
+                  ></v-file-input>
+                  <v-file-input
+                    v-model="bankCanceledCheckUrl"
+                    show-size
+                    counter
+                    multiple
+                    hint="Corporate bank account details:"
+                    label="image of canceled check or bank statement"
+                  ></v-file-input>
+                  <v-file-input
+                    v-model="merchantLogoUrl"
+                    show-size
+                    counter
+                    multiple
+                    hint="Merchant logo"
+                    label="Upload image of logo"
+                  ></v-file-input>
+                </div>
+              </div>
             </div>
             <div>
               <v-btn
@@ -175,6 +309,23 @@ export default {
       businessType: "",
       incorporationCountry: "",
       incorporationState: "",
+      businessRegistryDate: "",
+      businessEinTaxId: "",
+      dunsNumber: "",
+      primaryName: "",
+      primaryRole: "",
+      primaryEmail: "",
+      primaryPhone: "",
+      secondName: "",
+      secondRole: "",
+      secondEmail: "",
+      secondPhone: "",
+      primaryContactId:"",
+      secondContactId:"",
+      certificateDocUrl: "",
+      bankCanceledCheckUrl: "",
+      merchantLogoUrl: "",
+
       notification: "",
       step: 1,
       rules: {
@@ -199,12 +350,25 @@ export default {
       console.log("businessType---", this.businessType);
       console.log("incorporationCountry---", this.incorporationCountry);
       console.log("incorporationState---", this.incorporationState);
-
+      console.log("businessRegistryDate---", this.businessRegistryDate);
+      console.log("businessEinTaxId---", this.businessEinTaxId);
+      console.log("dunsNumber---", this.dunsNumber);
+      console.log("primaryName---", this.primaryName);
+      console.log("primaryRole---", this.primaryRole);
+      console.log("primaryEmail---", this.primaryEmail);
+      console.log("primaryPhone---", this.primaryPhone);
+      console.log("secondName---", this.secondName);
+      console.log("secondRole---", this.secondRole);
+      console.log("secondEmail---", this.secondEmail);
+      console.log("secondPhone---", this.secondPhone);
+      if (this.certificateDocUrl)
+        console.log("certificateDocUrl---", this.certificateDocUrl[0].name);
+      // console.log("bankCanceledCheckUrl---", this.bankCanceledCheckUrl.File.name);
+      // console.log("merchantLogoUrl---", this.merchantLogoUrl.File.name);
       //this.emailVerification();
 
       if (this.step === 1) this.step = 2;
       else if (this.step === 2) {
-        //  this.onboardDB();
         localStorage.setItem("businessName", this.businessName);
         this.step = 3;
       } else if (this.step === 3) {
@@ -215,6 +379,7 @@ export default {
       else if (this.step === 5) this.step = 6;
       else if (this.step === 6) this.step = 7;
       else if (this.step === 7) this.step = 8;
+      else if (this.step === 8) this.onboardDB();
     },
     emailVerification: function () {
       firebase
@@ -236,7 +401,90 @@ export default {
           this.error = error.message;
         });
     },
-   
+    onboardDB: function () {
+      let today = new Date().toLocaleDateString();
+      console.log("today", today);
+      db.collection("merchants")
+        .add({
+          merchantId: "",
+          onboardDate: today,
+          legalBusinessName: this.businessName,
+          dba: { present: true, dba: "" },
+          incorporation: { country: "", federal: "", state: "" },
+          businessEmail: this.businessEmail,
+          businessPhone: { countryCode: "", number: "" },
+          businessAddress: {
+            addrLine1: "",
+            addrLine2: "",
+            city: "",
+            zip: "",
+            county: "",
+            state: "",
+            country: "",
+          },
+          businessWebsite: "",
+          businessRegistryDate: this.businessRegistryDate,
+          businessType: "", //given
+          businessEinTaxId: this.businessEinTaxId,
+          duns: { verified: true, dunsNumber: this.dunsNumber },
+          businessWallets: {
+            numWallets: 3,
+            wallets: [
+              { walletId: "", walletName: "" },
+              { walletId: "", walletName: "" },
+              { walletId: "", walletName: "" },
+            ],
+          },
+          primaryContact: {
+            present: true,
+            name: { firstName: this.primaryName, middleName: "", lastName: "" },
+            role: this.primaryRole,
+            email: this.primaryEmail,
+            mobileNum: { countryCode: "+1", number: this.primaryPhone },
+            empStatus: "owner",
+          }, //given
+          secondaryContact: {
+            present: true,
+            name: { firstName: this.secondName, middleName: "", lastName: "" },
+            role: this.secondRole,
+            email: this.secondEmail,
+            mobileNum: { countryCode: "+1", number: this.secondPhone },
+            empStatus: "owner",
+          }, //given
+          primaryContactId: {
+            present: true,
+            idType: this.primaryContactId,//"Passport",
+            idDocUrl: "",
+          }, //given
+          secondaryContactId: {
+            present: true,
+            idType: this.secondContactId,//"nationalID",
+            idDocUrl: "",
+          }, //given
+          businessCertificate: {
+            present: true,
+            type: "Cert of Incorporation",
+            docUrl: this.certificateDocUrl[0].name,
+          }, //given
+          merchantLogo: {
+            present: true,
+            logoUrl: this.merchantLogoUrl[0].name,
+          },
+          corpBankDetails: {
+            present: true,
+            bankName: "",
+            routingNum: "",
+            accountNum: "",
+            canceledCheckUrl: this.bankCanceledCheckUrl[0].name,
+          },
+        })
+        .then(() => {
+          alert("User successfully created!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

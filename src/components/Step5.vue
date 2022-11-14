@@ -2,7 +2,7 @@
   <div class="mx-16" style="width: 600px">
     <p class="title mt-5">Additional Organization Detail</p>
 
-    <div class="ml-4">
+    <!-- <div class="ml-4">
       <v-text-field
         v-model="title"
         :rules="rules"
@@ -25,7 +25,7 @@
         label="Pull down list"
         type="number"
       ></v-text-field>
-    </div>
+    </div> -->
     <!-- <v-btn
       class="yellow--text mt-16"
       color="green"

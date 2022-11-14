@@ -2,43 +2,7 @@
   <div class="mx-16" style="width: 600px">
     <p class="title mt-5">Identification information</p>
 
-    <div class="ml-4">
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        counter="125"
-        hint="Primary business contact ID:"
-        label="Passport of state issued driver's license"
-      ></v-text-field>
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        counter="125"
-        hint="Secondary business contact ID:"
-        label="Passport of state issued driver's license"
-      ></v-text-field>
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        counter="125"
-        hint="Certificate of incorporation:"
-        label="doc"
-      ></v-text-field>
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        counter="125"
-        hint="Corporate bank account details:"
-        label="image of canceled check or bank statement"
-      ></v-text-field>
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        counter="125"
-        hint="Merchant logo"
-        label="Upload image of logo"
-      ></v-text-field>
-    </div>
+
     <!-- <v-btn
       class="yellow--text mt-16"
       color="green"
